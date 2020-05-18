@@ -1,0 +1,42 @@
+html{
+    background-color:#87CEFA;
+    font-family: Arial, sans-serif;
+    font-size: 2vw;
+}
+#container-div{
+    display: flex;
+}
+#nav-menu{
+    font-family: Arial, sans-serif;
+    background-color:#00BFFF;
+    color: #FFFFFF;
+    position:relative;
+    z-index: 2;
+    font-size: 3vw;
+}
+#title{
+    font-weight: bold;
+    background-color: #1E90FF;
+    font-size: 4vw;
+}
+#message-delete{
+    color: red;
+    font-weight: bold;
+}
+#message-list{
+    outline-style: solid;
+    background-color: #00CED1;
+}
+#about-me{
+    background-color: #00CED1;
+}
+#about-project{
+    background-color: #40E0D0;
+}
+img {
+    position: relative;
+    z-index: 1;
+}
+span {
+    font-weight: bold;
+}

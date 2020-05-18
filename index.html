@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type="text/javascript" src="./scripts.js"></script>
+    </head>
+    <body onload="initHomePage();">
+        <div id="title">
+            Welcome to Message List Web Site
+        </div>
+        <nav id="nav-menu"></nav>
+        <div id="container-div">
+            <div id="message-input-area">
+                <div id="message-section-title">
+                    <span>The Message App</span>
+                </div>
+                <form id="message-input" onsubmit="addNewMessage(this.text.value); return false;">
+                    <label>
+                        New Message:
+                        <input name="text" type="text" />
+                    </label>
+                    <input type="submit" value="Add" />
+                </form>
+                <button id="message-delete" onclick="deleteAllMessages();">Delete All</button>
+                <ul id="message-list"></ul>
+            </div>
+        </div>
+    </body>
+</html>
