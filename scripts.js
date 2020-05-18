@@ -53,6 +53,10 @@ function deleteMessage(element) {
   element.parentNode.removeChild(element);
 }
 
+function clearInput(element) {
+  element.text.value = '';
+}
+
 function updateLikeBtn(btn) {
   if(btn.innerHTML === 'Like') {
     btn.innerHTML = 'Liked'

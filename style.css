@@ -20,7 +20,11 @@ html{
     font-size: 4vw;
 }
 #message-delete{
-    color: red;
+    color: #FF4500;
+    font-weight: bold;
+}
+#clear-input{
+    color: #FF8C00;
     font-weight: bold;
 }
 #message-list{
