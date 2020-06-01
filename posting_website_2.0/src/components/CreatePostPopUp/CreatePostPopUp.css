@@ -1,0 +1,60 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+.popup-main {
+    position:fixed;
+    background: white;
+    width: 35%;
+    height: 35%;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    align-items: center;
+}
+
+.popup-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    background: #B5B5B5;
+    display: flex;
+}
+
+.popup-header-spacer {
+    flex: 1;
+}
+
+.create-post-text-input {
+    justify-content: center;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.popup-footer {
+    justify-content: center;
+    position: fixed;
+    display: flex;
+    top: 90%;
+    left: 0;
+    width: 100%;
+    height: 10%;
+}
+  
+.display-block {
+    display: block;
+}
+  
+.display-none {
+    display: none;
+}
