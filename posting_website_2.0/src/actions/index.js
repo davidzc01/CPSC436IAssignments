@@ -1,28 +1,47 @@
-const { actions } = require('../Utils/constants')
+import axios from '../axios/axios'
+import { actions } from '../utils/constants'
 
 const updatePage = () => ({
         type: actions.UPDATE_PAGE,
 	}
 );
 
-const _createPost = ({ subject, content }) => ({
+const _createPost = ({ key, subject, content }) => ({
         type: actions.CREATE_POST,
         payLoad: {
+            key,
             subject,
             content,
         },
     }
 );
 
-const createPost = ({ subject, content }) =>  _createPost({ subject, content });
+const createPost = ({ subject, content }) =>  {
+    return (dispatch) => {
+        const post = {
+            subject,
+            content,
+            stared: false,
+        }
+        return axios.post('posts/create',post).then(result => {
+            dispatch(_createPost(result.data))
+        });
+    }
+}
 
-const _deletePost = key =>({
+const _deletePost = (key) =>({
         type: actions.DELETE_POST,
         key,
 	}
 );
 
-const deletePost = key => _deletePost(key);
+const deletePost = key => {
+    return (dispatch) => {
+        return axios.delete(`posts/${key}`).then(() => {
+            dispatch(_deletePost(key))
+        });
+    }
+}
 
 const selectPost = key => ({
     type: actions.SELECT_POST,
@@ -39,7 +58,13 @@ const _updatePost = (key, { subject, content, stared }) => ({
     }
 });
 
-const updatePost = (key, { subject, content, stared }) => _updatePost(key, { subject, content, stared });
+const updatePost = (key, { subject, content, stared }) => {
+    return (dispatch) => {
+        return axios.put(`posts/${key}`, { subject, content, stared }).then(() => {
+            dispatch(_updatePost(key, { subject, content, stared }));
+        });
+    }
+}
 
 const changePostContent = input => {
     return {
@@ -81,6 +106,25 @@ const toggleShowMode = () => {
     };
 };
 
+const _getPosts = (posts) => ({
+    type: actions.GET_POSTS,
+    posts,
+})
+
+const getPosts = () => {
+    return (dispatch) => {
+        return axios.get('posts').then(result => {
+            const posts = [];
+ 
+            result.data.forEach(item => {
+                posts.push(item);
+            });
+ 
+            dispatch(_getPosts(posts));
+        });
+    };
+}
+
 export {
     updatePage,
     createPost,
@@ -93,4 +137,5 @@ export {
     togglePostDetailPopUp,
     toggleEditPostPopUp,
     toggleShowMode,
+    getPosts,
 };

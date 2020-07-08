@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
  
-var postingSchema = new Schema({
+var postSchema = new Schema({
     subject: String,
     content: String,
     stared: Boolean 
 });
 
-postingSchema.method('toClient', function() {
+postSchema.method('toClient', function() {
     var obj = this.toObject();
  
     //Rename fields
-    obj.id = obj._id;
+    obj.key = obj._id;
     delete obj._id;
  
     return obj;
 });
  
-module.exports = mongoose.model('Posting', postingSchema); 
+module.exports = mongoose.model('Post', postSchema); 

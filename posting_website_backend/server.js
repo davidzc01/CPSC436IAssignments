@@ -5,7 +5,7 @@ app.use(bodyParser.json())
  
 const cors = require('cors')
 const corsOptions = {
-  origin: 'http://localhost:9000',
+  origin: 'http://localhost:3001',
   optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions))
@@ -25,7 +25,7 @@ mongoose.connect(dbConfig.url)
     process.exit();
 });
  
-require('./route/posting.route.js')(app);
+require('./route/post.route.js')(app);
  
 // Create a Server
 var server = app.listen(8080, function () {

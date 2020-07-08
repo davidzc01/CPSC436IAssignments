@@ -27,8 +27,9 @@ class CreatePostPopUp extends React.Component {
                                 if(this.props.postSubject && this.props.postContent) {
                                     this.props.createPost({ subject:this.props.postSubject, content:this.props.postContent });
                                     this.props.toggleCreatePostPopUp();
+                                } else {
+                                    alert('You Post is Empty!');
                                 }
-                                alert('You Post is Empty!');
                             }
                         }
                     >

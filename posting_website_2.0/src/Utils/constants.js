@@ -13,8 +13,9 @@ const actions = {
     CONTENT_CHANGE: 'CONTENT_CHANGE',
     SUBJECT_CHANGE: 'SUBJECT_CHANGE',
     TOGGLE_SHOW_MODE: 'TOGGLE_SHOW_MODE',
+    GET_POSTS: 'GET_POSTS'
 }
 
-module.exports = {
+export {
     actions
 }
