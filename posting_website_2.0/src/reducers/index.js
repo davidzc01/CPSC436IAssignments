@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+const { actions } = require('../Utils/constants')
 
 const initPostsJSON = '['
 + '{"key": "1", "subject": "subject 1", "content": "test content 1", "stared": true},' 
@@ -7,61 +8,94 @@ const initPostsJSON = '['
 + ']'
 
 const pageReducer = (isHome = true, action) => {
-	if (action.type === 'PAGE_UPDATE') {
+	if (action.type === actions.UPDATE_PAGE) {
 		isHome = !isHome;
 	}
 	return isHome;
 };
 
 const postReducer = (posts = JSON.parse(initPostsJSON), action) => {
-	if (action.type === 'ADD_POST') {
-		let newKey = Math.floor(Math.random() * 100);
-		// eslint-disable-next-line
-		while (posts.find(post => post.key === newKey) !== undefined) {
-			newKey = Math.floor(Math.random() * 100);
-		}
-		return [...posts, { key: newKey, subject: action.payLoad.subject, content: action.payLoad.content, stared: false }];
+	switch (action.type) {
+		case actions.CREATE_POST:
+			let newKey = Math.floor(Math.random() * 100);
+			// eslint-disable-next-line
+			// while (posts.find(post => post.key === newKey)) {
+			// 	newKey = Math.floor(Math.random() * 100);
+			// }
+			return [
+					...posts,
+					{ 
+						key: newKey,
+						selected: false,
+						subject: action.payLoad.subject,
+						content: action.payLoad.content,
+						stared: false 
+					}
+				];
+		case actions.DELETE_POST:
+			return posts.filter(post => post.key !== action.key);
+		case actions.UPDATE_POST:
+			return posts.reduce((posts, post) => {
+				if (post.key === action.key) {
+					post.stared = action.payLoad.stared;
+					post.subject = action.payLoad.subject;
+					post.content = action.payLoad.content;
+				}
+				return [...posts, post]
+			}, []);
+		default:
+			return posts;
 	}
-	if (action.type === 'DELETE_POST') {
-		return posts.filter(post => post.key !== action.key);
-	}
-	if (action.type === 'DELETE_ALL_POSTS') {
-		return [];
-	}
-	if (action.type === 'STAR_POST') {
-		return posts.reduce((posts, post) => {
-			if (post.key === action.key) {
-				post.stared = !post.stared;
+}
+
+const selectedPostReducer = (selectedPosts = [], action) => {
+	switch (action.type) {
+		case actions.SELECT_POST:
+			if (selectedPosts.includes(action.key)) {
+				selectedPosts.filter(postKey => postKey !== action.key);
+			} else {
+				selectedPosts.push(action.key)
 			}
-			return [...posts, post]
-		}, []);
+			return selectedPosts;
+		case actions.DELETE_POST:
+			if (selectedPosts.includes(action.key)) {
+				selectedPosts.filter(postKey => postKey !== action.key);
+			}
+			return selectedPosts;
+		default:
+			return selectedPosts;
 	}
-	return posts;
 }
 
 const postSubjectReducer = (input = '', action) => {
-	if (action.type === 'SUBJECT_CHANGE') {
+	if (action.type === actions.SUBJECT_CHANGE) {
 		return action.input;
+	}
+	if ([actions.TOGGLE_VIEW_POP_UP, actions.TOGGLE_CREATE_POP_UP].includes(action.type)) {
+		return '';
 	}
 	return input;
 }
 
 const postContentReducer = (input = '', action) => {
-	if (action.type === 'CONTENT_CHANGE') {
+	if (action.type === actions.CONTENT_CHANGE) {
 		return action.input;
+	}
+	if ([actions.TOGGLE_VIEW_POP_UP, actions.TOGGLE_CREATE_POP_UP].includes(action.type)) {
+		return '';
 	}
 	return input;
 }
 
 const createPostPopUpReducer = (showCreatePopUp = false, action) => {
-	if (['TOGGLE_CREATE_POST', 'ADD_POST'].includes(action.type)) {
+	if ([actions.TOGGLE_CREATE_POP_UP, actions.CREATE_POST].includes(action.type)) {
 		showCreatePopUp = !showCreatePopUp;
 	}
 	return showCreatePopUp;
 }
 
 const postDetailPopUpReducer = (showPostDetailPopUp = {show: false, key:undefined}, action) => {
-	if (action.type === 'TOGGLE_POST_DETAIL') {
+	if (action.type === actions.TOGGLE_VIEW_POP_UP) {
 		return {
 			show: !showPostDetailPopUp.show,
 			key: action.key,
@@ -70,11 +104,21 @@ const postDetailPopUpReducer = (showPostDetailPopUp = {show: false, key:undefine
 	return showPostDetailPopUp;
 }
 
-const viewReducer = (viewType = 'NORMAL', action) => {
-	if (action.type === 'TOGGLE_STARED_VIEW') {
-		viewType = viewType !== 'STARED' ? 'STARED' : 'NORMAL';
+const editPostPopUpReducer = (showEditPostPopUp = {show: false, key:undefined}, action) => {
+	if (action.type === actions.TOGGLE_EDIT_POP_UP) {
+		return {
+			show: !showEditPostPopUp.show,
+			key: action.key,
+		};
 	}
-	return viewType;
+	return showEditPostPopUp;
+}
+
+const viewReducer = (showAll = true, action) => {
+	if (action.type === actions.TOGGLE_SHOW_MODE) {
+		showAll = !showAll;
+	}
+	return showAll;
 }
 
 export default combineReducers({
@@ -85,5 +129,7 @@ export default combineReducers({
 	createPostPopUpOpen: createPostPopUpReducer,
 	showPostDetailPopUp: postDetailPopUpReducer,
 	viewType: viewReducer,
+	selectedPosts: selectedPostReducer,
+	editPostPopUpOpen: editPostPopUpReducer,
 });
 

@@ -1,81 +1,96 @@
-const updatePage = () => {
-	return {
-        type: 'PAGE_UPDATE',
-	};
-};
+const { actions } = require('../Utils/constants')
 
-const addPost = ({ subject, content }) => {
-    return {
-        type: 'ADD_POST',
+const updatePage = () => ({
+        type: actions.UPDATE_PAGE,
+	}
+);
+
+const _createPost = ({ subject, content }) => ({
+        type: actions.CREATE_POST,
         payLoad: {
             subject,
             content,
         },
-	};
-};
+    }
+);
 
-const deletePost = key => {
-    return {
-        type: 'DELETE_POST',
-        key,
-	};
-};
+const createPost = ({ subject, content }) =>  _createPost({ subject, content });
 
-const starPost = key => {
-    return {
-        type: 'STAR_POST',
+const _deletePost = key =>({
+        type: actions.DELETE_POST,
         key,
-	};
-};
+	}
+);
+
+const deletePost = key => _deletePost(key);
+
+const selectPost = key => ({
+    type: actions.SELECT_POST,
+    key,
+});
+
+const _updatePost = (key, { subject, content, stared }) => ({
+    type: actions.UPDATE_POST,
+    key,
+    payLoad: {
+        subject,
+        content,
+        stared,
+    }
+});
+
+const updatePost = (key, { subject, content, stared }) => _updatePost(key, { subject, content, stared });
 
 const changePostContent = input => {
     return {
-        type: 'CONTENT_CHANGE',
+        type: actions.CONTENT_CHANGE,
         input: input,
 	};
 };
 
 const changePostSubject = input => {
     return {
-        type: 'SUBJECT_CHANGE',
+        type: actions.SUBJECT_CHANGE,
         input: input,
 	};
 };
 
 const toggleCreatePostPopUp = () => {
     return {
-        type: 'TOGGLE_CREATE_POST',
+        type: actions.TOGGLE_CREATE_POP_UP,
     };
 };
 
 const togglePostDetailPopUp = (key) => {
     return {
-        type: 'TOGGLE_POST_DETAIL',
+        type: actions.TOGGLE_VIEW_POP_UP,
         key,
     };
 };
 
-const toggleStaredView = () => {
+const toggleEditPostPopUp = (key) => {
     return {
-        type: 'TOGGLE_STARED_VIEW',
-    }
+        type: actions.TOGGLE_EDIT_POP_UP,
+        key,
+    };
 };
 
-const deleteAllPosts = () => {
+const toggleShowMode = () => {
     return {
-        type: 'DELETE_ALL_POSTS',
-    }
-}
+        type: actions.TOGGLE_SHOW_MODE
+    };
+};
 
 export {
     updatePage,
-    addPost,
+    createPost,
     changePostSubject,
     changePostContent,
     toggleCreatePostPopUp,
     deletePost,
-    starPost,
+    updatePost,
+    selectPost,
     togglePostDetailPopUp,
-    toggleStaredView,
-    deleteAllPosts,
+    toggleEditPostPopUp,
+    toggleShowMode,
 };

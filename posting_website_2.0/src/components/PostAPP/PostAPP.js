@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PostToolBar from '../PostToolBar/PostToolBar';
 import CreatePostPopUp from '../CreatePostPopUp/CreatePostPopUp';
 import PostDetailPopUp from '../PostDetailPopUp/PostDetailPopUp';
+import EditPostPopUp from '../EditPostPopUp/EditPostPopUp';
 import PostList from '../PostList/PostList';
 
 import './PostAPP.css';
@@ -17,6 +18,7 @@ class PostAPP extends React.Component {
 					<PostList />
 					<CreatePostPopUp />
 					<PostDetailPopUp />
+					<EditPostPopUp />
 				</div>
 			</div>
         );

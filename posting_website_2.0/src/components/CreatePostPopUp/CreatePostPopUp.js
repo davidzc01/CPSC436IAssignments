@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TextInputArea from '../TextInputArea/TextInputArea';
-import { toggleCreatePostPopUp, addPost } from '../../actions';
-
-import './CreatePostPopUp.css';
-
+import { toggleCreatePostPopUp, createPost, changePostSubject, changePostContent } from '../../actions';
+import PopUpWindow from '../PopUpWindow/PopUpWindow';
 
 class CreatePostPopUp extends React.Component {
 	render() {
@@ -13,22 +11,31 @@ class CreatePostPopUp extends React.Component {
         }
         const showHideClassName = this.props.createPostPopUpOpen ? "popup display-block" : "popup display-none";
 		return (
-            <div className={showHideClassName}>
-                <div className='popup-main'>
-                    <div className='popup-header'>
-                        <div className='popup-title'> New Post </div>
-                        <div className='popup-header-spacer'/>
-                        <button className='close-popup' onClick={this.props.toggleCreatePostPopUp}>X</button>
-                    </div>
+            <PopUpWindow
+                clasName = {showHideClassName}
+                popUpTitle = {'Create Your New Post!'}
+                toggleAction = {this.props.toggleCreatePostPopUp}
+                popUpBody = {
                     <div className='create-post-text-input'>
-                        <TextInputArea />
+                        <TextInputArea/>
                     </div>
-                    <div className='popup-footer'>
-                        <div className='popup-header-spacer'/>
-                        <button onClick={() => this.props.addPost({ subject:this.props.postSubject, content:this.props.postContent })}>Submit</button>
-                    </div>
-                </div>
-			</div>
+                }
+                popUpFooter = {
+                    <button
+                        onClick={
+                            () => {
+                                if(this.props.postSubject && this.props.postContent) {
+                                    this.props.createPost({ subject:this.props.postSubject, content:this.props.postContent });
+                                    this.props.toggleCreatePostPopUp();
+                                }
+                                alert('You Post is Empty!');
+                            }
+                        }
+                    >
+                        Submit
+                    </button>
+                }
+            />
         );
 	}
 }
@@ -41,4 +48,4 @@ const mapStateToProps = (state) => {
     };
 }    
 
-export default connect(mapStateToProps, { toggleCreatePostPopUp, addPost })(CreatePostPopUp);
+export default connect(mapStateToProps, { toggleCreatePostPopUp, createPost, changePostSubject, changePostContent })(CreatePostPopUp);

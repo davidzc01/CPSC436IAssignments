@@ -1,11 +1,14 @@
 import React from 'react'
 
-const PostItem = ({ text, starPost, starStatus, showDetail, deletePost }) => (
+const PostItem = ({ onSelect, text, onStar, starStatus, onView, onEdit, onDelete }) => (
   <li>
+    <input type="checkbox" onClick={onSelect}/>
     {text}
-    <button onClick={starPost}> {starStatus}</button>
-    <button onClick={showDetail}>More</button>
-    <button onClick={deletePost}>Delete</button>
+    <div className="post-item-spacer" style={{flex: 1, display: 'inline'}}/>
+    <button onClick={onStar}> {starStatus}</button>
+    <button onClick={onView}>View</button>
+    <button onClick={onEdit}>Edit</button>
+    <button onClick={onDelete}>Delete</button>
   </li>
 )
 

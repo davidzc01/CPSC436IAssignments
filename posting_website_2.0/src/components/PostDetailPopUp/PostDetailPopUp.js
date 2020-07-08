@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { togglePostDetailPopUp } from '../../actions';
+import { togglePostDetailPopUp, deletePost } from '../../actions';
+import PopUpWindow from '../PopUpWindow/PopUpWindow';
 
 class PostDetailPopUp extends React.Component {
 	render() {
@@ -10,25 +11,27 @@ class PostDetailPopUp extends React.Component {
         }
         const showHideClassName = this.props.showPostDetailPopUp.show ? "popup display-block" : "popup display-none";
 		return (
-            <div className={showHideClassName}>
-                <div className='popup-main'>
-                    <div className='popup-header'>
-                        <div className='popup-title'> Your Post </div>
-                        <div className='popup-header-spacer'/>
-                        <button className='close-popup' onClick={this.props.togglePostDetailPopUp}>X</button>
+            <PopUpWindow
+                clasName = {showHideClassName}
+                popUpTitle = {postToShow.subject}
+                toggleAction = {this.props.togglePostDetailPopUp}
+                popUpBody = {
+                    <p>{postToShow.content}</p>
+                }
+                popUpFooter = {
+                    <div>
+                        <button onClick={() => {}}>
+                            Edit
+                        </button>
+                        <button onClick={() => {
+                            this.props.deletePost(postToShow.key);
+                            this.props.togglePostDetailPopUp();
+                        }}>
+                            Delete
+                        </button>
                     </div>
-                    <div className='create-post-text-input'>
-                        <label>
-                            Subject:
-                            <h4>{postToShow.subject}</h4>
-                        </label>
-                        <label>
-                            Post Content:
-                            <p>{postToShow.content}</p>
-                        </label>
-                    </div>
-                </div>
-			</div>
+                }
+            />
         );
 	}
 }
@@ -40,4 +43,4 @@ const mapStateToProps = (state) => {
     };
 }    
 
-export default connect(mapStateToProps, { togglePostDetailPopUp })(PostDetailPopUp);
+export default connect(mapStateToProps, { togglePostDetailPopUp, deletePost })(PostDetailPopUp);

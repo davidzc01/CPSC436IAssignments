@@ -1,0 +1,8 @@
+.post-tool-bar {
+    background: #B5B5B5;
+    display: flex;
+}
+
+.tool-bar-spacer {
+    flex: 1;
+}

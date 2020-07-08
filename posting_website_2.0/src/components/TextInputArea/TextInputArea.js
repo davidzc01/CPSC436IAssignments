@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changePostSubject, changePostContent } from '../../actions';
 
-import './TextInputArea.css';
-
-
 class TextInputArea extends React.Component {
 	render() {
 		return (
@@ -12,14 +9,26 @@ class TextInputArea extends React.Component {
                 <div>
                     <label>
                         Subject:
-                        <input type="text" onChange={(e) => this.props.changePostSubject(e.target.value)} />
+                        <input
+                            id="subject-input"
+                            type="text"
+                            placeholder="Subject"
+                            defaultValue={this.props.defaultSubject}
+                            onChange={(e) => this.props.changePostSubject(e.target.value)}
+                        />
                     </label>
                 </div>
                 <div>
                     <label>
                         Post Content:
                         <br />
-                        <textarea type="text" onChange={(e) => this.props.changePostContent(e.target.value)} />
+                        <textarea
+                            id="content-input"
+                            type="text"
+                            placeholder="Content"
+                            defaultValue={this.props.defaultContent}
+                            onChange={(e) => this.props.changePostContent(e.target.value)}
+                        />
                     </label>
                 </div>
             </div>
