@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
-import Header from './components/Header/Header';
-import PostAPP from './components/PostAPP/PostAPP';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import getAppStore from './store/store';
-import { getPosts } from './actions'
+import { getPosts } from './actions';
+import Routes from './routes/routes';
 
 const store = getAppStore();
 
@@ -14,8 +13,7 @@ store.dispatch(getPosts())
   .then(() => {
     ReactDOM.render(
       <Provider store={store}>
-        <Header />
-        <PostAPP />
+        <Routes />
       </Provider>,
       document.getElementById('root'));
   })

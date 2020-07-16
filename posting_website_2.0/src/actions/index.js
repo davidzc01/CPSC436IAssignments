@@ -106,6 +106,13 @@ const toggleShowMode = () => {
     };
 };
 
+const toggleMobileMenu = (anchorEl) => {
+    return {
+        type: actions.TOGGLE_MOBILE_MENU,
+        anchorEl,
+    }
+}
+
 const _getPosts = (posts) => ({
     type: actions.GET_POSTS,
     posts,
@@ -138,4 +145,5 @@ export {
     toggleEditPostPopUp,
     toggleShowMode,
     getPosts,
+    toggleMobileMenu,
 };

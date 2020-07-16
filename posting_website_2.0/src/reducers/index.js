@@ -112,6 +112,13 @@ const viewReducer = (showAll = true, action) => {
 	return showAll;
 }
 
+const mobileMenuReducer = (anchorEl = null, action) => {
+	if (action.type === actions.TOGGLE_MOBILE_MENU) {
+		anchorEl = action.anchorEl;
+	}
+	return anchorEl
+}
+
 export default combineReducers({
 	isHome: pageReducer,
 	posts: postReducer,
@@ -122,5 +129,6 @@ export default combineReducers({
 	viewType: viewReducer,
 	selectedPosts: selectedPostReducer,
 	editPostPopUpOpen: editPostPopUpReducer,
+	mobileMenuAnchorEl: mobileMenuReducer,
 });
 

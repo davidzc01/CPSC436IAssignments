@@ -5,22 +5,25 @@ import CreatePostPopUp from '../CreatePostPopUp/CreatePostPopUp';
 import PostDetailPopUp from '../PostDetailPopUp/PostDetailPopUp';
 import EditPostPopUp from '../EditPostPopUp/EditPostPopUp';
 import PostList from '../PostList/PostList';
+import Container from '../Container/Container';
 
-import './PostAPP.css';
+import './HomePage.css';
 
 
-class PostAPP extends React.Component {
+class HomePage extends React.Component {
 	render() {
 		return (
-            <div className='post-app'>
-				<div className='post-app-frame'>
-					<PostToolBar />
-					<PostList />
-					<CreatePostPopUp />
-					<PostDetailPopUp />
-					<EditPostPopUp />
-				</div>
-			</div>
+			<Container
+				body = {
+					<div className='post-app-frame'>
+						<PostToolBar />
+						<PostList />
+						<CreatePostPopUp />
+						<PostDetailPopUp />
+						<EditPostPopUp />
+					</div>
+				}
+			/>
         );
 	}
 }
@@ -29,4 +32,4 @@ const mapStateToProps = (state) => {
     return { postings: state.postings };
 }    
 
-export default connect(mapStateToProps)(PostAPP);
+export default connect(mapStateToProps)(HomePage);
