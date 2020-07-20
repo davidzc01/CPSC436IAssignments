@@ -23,7 +23,7 @@ const createPost = ({ subject, content }) =>  {
             content,
             stared: false,
         }
-        return axios.post('/posts/create',post).then(result => {
+        return axios.post('/api/posts/create',post).then(result => {
             dispatch(_createPost(result.data))
         });
     }
