@@ -17,7 +17,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
  
 // Connecting to the database
-mongoose.connect(dbConfig.url)
+mongoose.connect(process.env.MONGODB_URI || dbConfig.url)
 .then(() => {
     console.log("Successfully connected to MongoDB.");    
 }).catch(err => {
