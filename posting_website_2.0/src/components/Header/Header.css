@@ -1,0 +1,17 @@
+.header {
+    flex: 1;
+    color: grey;
+}
+
+.header-page-title {
+    color: white;
+    text-decoration: none;
+    flex: 1;
+}
+
+.navbar-brand {
+    color: inherit;
+    text-decoration: inherit;
+    display: flex;
+    margin: 1vw;
+}
