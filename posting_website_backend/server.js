@@ -5,10 +5,7 @@ var path = require('path');
 app.use(bodyParser.json())
  
 const cors = require('cors')
-const corsOptions = {
-  origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200
-}
+
 app.use(cors())
 
 app.use(express.static(path.join(__dirname,'../posting_website_2.0/build')));
