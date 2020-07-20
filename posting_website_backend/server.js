@@ -9,7 +9,7 @@ const corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200
 }
-app.use(cors(corsOptions))
+app.use(cors())
 
 app.use(express.static(path.join(__dirname,'../posting_website_2.0/build')));
  
