@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { toggleCreatePostPopUp, toggleShowMode, deletePost, selectPost } from '../../actions';
+import { Paper, Hidden, Button } from '@material-ui/core'
 
 import './PostToolBar.css';
 
@@ -8,27 +9,39 @@ import './PostToolBar.css';
 class PostToolBar extends React.Component {
 	render() {
 		return (
-            <div className='post-tool-bar'>
-				<button onClick={this.props.toggleCreatePostPopUp}>Create Post</button>
-				<div className='tool-bar-spacer'/>
-				<button onClick={() => {
-					this.props.selectedPosts.forEach(key => {
-						this.props.deletePost(key);
-					});
-				}}>Delete Selected</button>
-				<div className='tool-bar-spacer'/>
-				<button onClick={() => {
-					let showPostsList = this.props.posts;
-					if (!this.props.viewType) {
-						showPostsList = showPostsList.filter(post => post.stared);
-					}
-					showPostsList.forEach(post => {
-						this.props.selectPost(post.key)
-					});
-				}}>Select All</button>
-				<div className='tool-bar-spacer'/>
-				<button onClick={this.props.toggleShowMode}>{`Show: ${this.props.viewType ? 'All' : 'Stared'}`}</button>
-			</div>
+			// <Hidden smDown>
+					<Paper className='post-tool-bar'>
+						<div className='tool-bar-spacer'/>
+						<div className='toolbar-btn'>
+							<Button variant="contained" onClick={this.props.toggleCreatePostPopUp}>Create Post</Button>
+						</div>
+						<div className='tool-bar-spacer'/>
+						<div className='toolbar-btn'> 
+							<Button variant="contained" onClick={() => {
+								this.props.selectedPosts.forEach(key => {
+									this.props.deletePost(key);
+								});
+							}}>Delete Selected</Button>
+						</div>
+						{/* <div className='tool-bar-spacer'/> */}
+						{/* <div className='toolbar-btn'>
+							<Button variant="contained" onClick={() => {
+								let showPostsList = this.props.posts;
+								if (!this.props.viewType) {
+									showPostsList = showPostsList.filter(post => post.stared);
+								}
+								showPostsList.forEach(post => {
+									this.props.selectPost(post.key)
+								});
+							}}>Select All</Button>
+						</div> */}
+						<div className='tool-bar-spacer'/>
+						<div className='toolbar-btn'>
+							<Button variant="contained" onClick={this.props.toggleShowMode}>{`Show: ${this.props.viewType ? 'All' : 'Stared'}`}</Button>
+						</div>
+						<div className='tool-bar-spacer'/>
+					</Paper>
+			// {/* </Hidden> */}
         );
 	}
 }

@@ -6,7 +6,6 @@ import PostDetailPopUp from '../PostDetailPopUp/PostDetailPopUp';
 import EditPostPopUp from '../EditPostPopUp/EditPostPopUp';
 import PostList from '../PostList/PostList';
 import Container from '../Container/Container';
-
 import './HomePage.css';
 
 

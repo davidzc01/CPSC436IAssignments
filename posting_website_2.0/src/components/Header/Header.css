@@ -1,6 +1,6 @@
 .header {
     flex: 1;
-    height: 65px;
+    color: grey;
 }
 
 .header-page-title {
@@ -13,5 +13,5 @@
     color: inherit;
     text-decoration: inherit;
     display: flex;
-    margin: 5px;
+    margin: 1vw;
 }
