@@ -23,7 +23,7 @@ const createPost = ({ subject, content }) =>  {
             content,
             stared: false,
         }
-        return axios.post('posts/create',post).then(result => {
+        return axios.post('/posts/create',post).then(result => {
             dispatch(_createPost(result.data))
         });
     }
@@ -37,7 +37,7 @@ const _deletePost = (key) =>({
 
 const deletePost = key => {
     return (dispatch) => {
-        return axios.delete(`posts/${key}`).then(() => {
+        return axios.delete(`/posts/${key}`).then(() => {
             dispatch(_deletePost(key))
         });
     }
@@ -60,7 +60,7 @@ const _updatePost = (key, { subject, content, stared }) => ({
 
 const updatePost = (key, { subject, content, stared }) => {
     return (dispatch) => {
-        return axios.put(`posts/${key}`, { subject, content, stared }).then(() => {
+        return axios.put(`/posts/${key}`, { subject, content, stared }).then(() => {
             dispatch(_updatePost(key, { subject, content, stared }));
         });
     }
@@ -120,7 +120,7 @@ const _getPosts = (posts) => ({
 
 const getPosts = () => {
     return (dispatch) => {
-        return axios.get('posts').then(result => {
+        return axios.get('/posts').then(result => {
             const posts = [];
  
             result.data.forEach(item => {
