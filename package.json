@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "start": "cd posting_website_backend && node server.js",
+        "heroku-prebuild": "cd posting_website_2.0 && npm install && npm run build && cd .. && cd posting_website_backend && npm install"
+      }
+}

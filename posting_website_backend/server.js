@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var path = require('path');
 app.use(bodyParser.json())
  
 const cors = require('cors')
@@ -9,6 +10,8 @@ const corsOptions = {
   optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions))
+
+app.use(express.static(path.join(__dirname,'../posting_website_2.0/build')));
  
 // Configuring the database
 const dbConfig = require('./config/mongodb.config.js');
